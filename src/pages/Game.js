@@ -35,7 +35,7 @@ class Game extends React.Component {
 
     render() {
         return (
-        <div>
+        <div className="container-fluid">
             {this.state.gameState === GAME_STATE.HOME && <Start handleGameStatus={this.handleStatus} />}
             {this.state.gameState === GAME_STATE.PLAY && <Play handleGameStatus={this.handleStatus} />}
             {this.state.gameState === GAME_STATE.SCORE_BOARD && <ScoreBoard handleGameStatus={this.handleStatus} />}
