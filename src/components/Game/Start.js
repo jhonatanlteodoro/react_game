@@ -1,33 +1,26 @@
 import React from "react";
-import GAME_STATE from "./GameState";
+import GAME_STATE from "./constants/GameState";
 
 
-class Start extends React.Component {
+const Start = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.startGame = this.startGame.bind(this);
+    function startGame() {
+        props.handleGameStatus(GAME_STATE.PLAY);
     }
+    
+    return (
+        <div className="container">
 
-    startGame(){
-        this.props.handleGameStatus(GAME_STATE.PLAY);
-    }
+            <div className="card mt-5 text-center">
+                <div className="card-body">
+                    <h5 className="card-title mt-3">GUESS GAME</h5>
 
-    render() {
-        return (
-            <div className="container">
-
-                <div className="card mt-5 text-center">
-                    <div className="card-body">
-                        <h5 className="card-title mt-3">GUESS GAME</h5>
-
-                        <button className="btn btn-primary btn-lg btn-block mt-3" onClick={this.startGame}>Start</button>
-                    </div>
                 </div>
-
+                <button className="btn btn-primary btn-lg btn-block mt-3" onClick={startGame}>Start</button>
             </div>
-        )
-    }
+
+        </div>
+    )
 }
 
 
