@@ -12,3 +12,8 @@ Set your credentials on src/utils in order to be able access the the movie api
 
 
 # This project is not production ready :) #
+
+
+project created using
+node 18.14.0
+npm 9.3.1
