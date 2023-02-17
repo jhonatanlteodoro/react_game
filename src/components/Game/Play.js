@@ -3,21 +3,15 @@ import TheMovieService from "../../services/TheMovieService";
 import GAME_STATE from "./constants/GameState";
 import GetARandomActorName from "./constants/RandomActorsName";
 
-function useTime(endGame, sessionTime) {
+function useTime() {
     const [timer, setTime] = useState(1);
     useEffect(() => {
       const id = setInterval(() => {
-
-        // After 60secs the game must stop
-        if (timer >= sessionTime) {
-            endGame();
-        } else {
-            setTime(timer+1);
-        }
+        setTime(timer+1);
 
       }, 1000);
       return () => clearInterval(id);
-    }, [timer, endGame, sessionTime]);
+    }, [timer]);
     return timer;
 }
 
@@ -85,12 +79,17 @@ const GuessActor = ({addScore, movie, actor, cast, removeCurrentMovie}) => {
 const Play = (props) => {
     // define how many secondes a session must least
     const SESSION_TIME = 60;
+    const timer = useTime(endGame, SESSION_TIME);
 
     function endGame(){
         props.handleGameStatus(GAME_STATE.SCORE_BOARD);
     }
 
-    const timer = useTime(endGame, SESSION_TIME);
+    if ( timer >= SESSION_TIME) {
+        // After 60secs the game must stop
+        endGame();
+    }
+
     const [loading, setLoading] = useState(true);
     const [moviePage, setMoviePage] = useState(0);
     const [movies, setMovies] = useState([]);
